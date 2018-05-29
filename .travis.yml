@@ -11,11 +11,28 @@ before_script:
   - mysql -e 'CREATE DATABASE small_test;'
   - cp .env.test.local.travis .env.test.local
 
-script:
- - RAILS_ENV=test bundle exec rails db:migrate
- - RAILS_ENV=test bundle exec rails test
-
 branches:
   only:
   - master
   - develop
+
+env:
+  global:
+    - RAILS_ENV=test
+
+cache:
+  bundler: true
+  directories:
+    - node_modules
+  yarn: true
+
+install:
+  - bundle install
+  - nvm install node
+  - node -v
+  - npm i -g yarn
+  - yarn
+
+script:
+ - bundle exec rails db:migrate
+ - bundle exec rails test
