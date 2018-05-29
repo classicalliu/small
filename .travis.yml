@@ -28,11 +28,11 @@ cache:
 
 install:
   - bundle install
-  - nvm install node
+  - nvm install 8.11.2
   - node -v
   - npm i -g yarn
   - yarn
 
 script:
- - bundle exec rails db:migrate
- - bundle exec rails test
+  - bundle exec rails db:migrate
+  - bundle exec rails test
